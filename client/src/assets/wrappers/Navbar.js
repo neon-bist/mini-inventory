@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.nav`
   height: var(--nav-height);
@@ -39,21 +39,23 @@ const Wrapper = styled.nav`
     box-shadow: var(--shadow-2);
   }
 
+  button:hover + .dropdown,
+  .dropdown:hover {
+    display: block;
+  }
   .dropdown {
+    display: none;
     position: absolute;
-    top: 40px;
+    top: 30px;
     left: 0;
     width: 100%;
     background: var(--primary-100);
     box-shadow: var(--shadow-2);
     padding: 0.5rem;
     text-align: center;
-    visibility: hidden;
     border-radius: var(--borderRadius);
   }
-  .show-dropdown {
-    visibility: visible;
-  }
+
   .dropdown-btn {
     background: transparent;
     border-color: transparent;
@@ -69,6 +71,7 @@ const Wrapper = styled.nav`
   @media (min-width: 992px) {
     position: sticky;
     top: 0;
+    z-index:2;
 
     .nav-center {
       width: 90%;
@@ -80,5 +83,5 @@ const Wrapper = styled.nav`
       display: block;
     }
   }
-`
-export default Wrapper
+`;
+export default Wrapper;

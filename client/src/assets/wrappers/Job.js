@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--white);
@@ -6,6 +6,8 @@ const Wrapper = styled.article`
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+  position: relative;
+ 
 
   header {
     padding: 1rem 1.5rem;
@@ -97,9 +99,15 @@ const Wrapper = styled.article`
     color: var(--red-dark);
     background: var(--red-light);
   }
-  &:hover .actions {
-    visibility: visible;
+  .actions {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
-`
+  &:hover .actions {
+    display: block;
+  }
+`;
 
-export default Wrapper
+export default Wrapper;
