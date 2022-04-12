@@ -3,7 +3,8 @@ const router = express.Router()
 
 import {
   createProduct,
-  getAllProducts
+  getAllProducts,
+  updateProduct,
   // deleteJob,
   // getAllJobs,
   // updateJob,
@@ -13,6 +14,6 @@ import {
 router.route('/').post(createProduct).get(getAllProducts)
 // // remember about :id
 // router.route('/stats').get(showStats)
-// router.route('/:id').delete(deleteJob).patch(updateJob)
+router.route('/:id').patch(updateProduct)
 
 export default router

@@ -177,7 +177,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       isEditing: true,
-      editJobId: _id,
+      editProductId: _id,
       productName,
       stock,
       description

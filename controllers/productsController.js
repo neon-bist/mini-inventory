@@ -65,22 +65,22 @@ const getAllProducts = async (req, res) => {
   res.status(StatusCodes.OK).json({ products, totalProducts, numOfPages })
 }
 const updateProduct = async (req, res) => {
-  const { id: jobId } = req.params
+  const { id: productId } = req.params
   const { stock, productName } = req.body
 
   if (!productName || !stock) {
     throw new BadRequestError('Please provide all values')
   }
-  const job = await Product.findOne({ _id: jobId })
+  const product = await Product.findOne({ _id: productId })
 
-  if (!job) {
-    throw new NotFoundError(`No job with id :${jobId}`)
+  if (!product) {
+    throw new NotFoundError(`No job with id :${productId}`)
   }
   // check permissions
 
-  checkPermissions(req.user, job.createdBy)
+  checkPermissions(req.user, product.createdBy)
 
-  const updatedProduct = await Product.findOneAndUpdate({ _id: jobId }, req.body, {
+  const updatedProduct = await Product.findOneAndUpdate({ _id: productId }, req.body, {
     new: true,
     runValidators: true,
   })
@@ -88,12 +88,12 @@ const updateProduct = async (req, res) => {
   res.status(StatusCodes.OK).json({ updatedProduct })
 }
 const deleteProduct = async (req, res) => {
-  const { id: jobId } = req.params
+  const { id: productId } = req.params
 
-  const job = await Product.findOne({ _id: jobId })
+  const job = await Product.findOne({ _id: productId })
 
   if (!job) {
-    throw new NotFoundError(`No job with id :${jobId}`)
+    throw new NotFoundError(`No job with id :${productId}`)
   }
 
   checkPermissions(req.user, job.createdBy)

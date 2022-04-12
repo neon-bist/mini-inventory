@@ -51,7 +51,7 @@ const initialState = {
   userLocation: userLocation || "",
   showSidebar: false,
   isEditing: false,
-  editJobId: "",
+  editProductId: "",
   position: "",
   company: "",
   productName:"",
@@ -244,13 +244,11 @@ const AppProvider = ({ children }) => {
     dispatch({ type: EDIT_JOB_BEGIN });
 
     try {
-      const { position, company, jobLocation, jobType, status } = state;
-      await authFetch.patch(`/products/${state.editJobId}`, {
-        company,
-        position,
-        jobLocation,
-        jobType,
-        status,
+      const { productName, stock, description } = state;
+      await authFetch.patch(`/products/${state.editProductId}`, {
+        productName,
+        stock,
+        description
       });
       dispatch({ type: EDIT_JOB_SUCCESS });
       dispatch({ type: CLEAR_VALUES });
