@@ -5,7 +5,8 @@ const Wrapper = styled.main`
     width: var(--fluid-width);
     max-width: var(--max-width);
     margin: 0 auto;
-    height: var(--nav-height);
+    margin-top: 60px;
+    height: 100px;
     display: flex;
     align-items: center;
   }
@@ -26,6 +27,11 @@ const Wrapper = styled.main`
   }
   .main-img {
     display: none;
+  }
+  .logo {
+    
+    width: 200px;
+    height:200px;
   }
   @media (min-width: 992px) {
     .page {

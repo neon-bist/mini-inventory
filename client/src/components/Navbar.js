@@ -2,10 +2,8 @@ import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { useAppContext } from "../context/appContext";
 import Logo from "./Logo";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
-  const [showLogout, setShowLogout] = useState(false);
   const { toggleSidebar, logoutUser, user } = useAppContext();
   const navigate = useNavigate();
   return (
@@ -22,8 +20,7 @@ const Navbar = () => {
           <button
             type="button"
             className="btn"
-            onClick={() => setShowLogout(!showLogout)}
-          >
+            >
             <FaUserCircle />
             {user?.name}
             <FaCaretDown />
