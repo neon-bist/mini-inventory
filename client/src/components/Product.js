@@ -12,7 +12,7 @@ const Job = ({
   description,
   createdAt,
 }) => {
-  const { setEditProduct, deleteJob } = useAppContext()
+  const { setEditProduct, deleteProduct } = useAppContext()
 
   let date = moment(createdAt)
   date = date.format('MMM Do, YYYY')
@@ -43,7 +43,7 @@ const Job = ({
             <button
               type='button'
               className='btn delete-btn'
-              onClick={() => deleteJob(_id)}
+              onClick={() => deleteProduct(_id)}
             >
               Delete
             </button>

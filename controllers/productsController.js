@@ -90,15 +90,15 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const { id: productId } = req.params
 
-  const job = await Product.findOne({ _id: productId })
+  const product = await Product.findOne({ _id: productId })
 
-  if (!job) {
+  if (!product) {
     throw new NotFoundError(`No job with id :${productId}`)
   }
 
-  checkPermissions(req.user, job.createdBy)
+  checkPermissions(req.user, product.createdBy)
 
-  await job.remove()
+  await product.remove()
 
   res.status(StatusCodes.OK).json({ msg: 'Success! Product removed' })
 }

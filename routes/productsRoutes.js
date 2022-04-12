@@ -5,15 +5,15 @@ import {
   createProduct,
   getAllProducts,
   updateProduct,
-  // deleteJob,
-  // getAllJobs,
-  // updateJob,
-  // showStats,
+  deleteProduct
 } from '../controllers/productsController.js'
 
-router.route('/').post(createProduct).get(getAllProducts)
-// // remember about :id
-// router.route('/stats').get(showStats)
-router.route('/:id').patch(updateProduct)
+router.route('/')
+  .post(createProduct)
+  .get(getAllProducts);
+
+router.route('/:id')
+  .patch(updateProduct)
+  .delete(deleteProduct);
 
 export default router
