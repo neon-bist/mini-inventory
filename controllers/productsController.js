@@ -18,26 +18,20 @@ const createProduct = async (req, res) => {
   const job = await Product.create(req.body)
   res.status(StatusCodes.CREATED).json({ job })
 }
-const getAllJobs = async (req, res) => {
+const getAllProducts = async (req, res) => {
   const { status, jobType, sort, search } = req.query
+  
 
   const queryObject = {
     createdBy: req.user.userId,
   }
-  // add stuff based on condition
-
-  if (status && status !== 'all') {
-    queryObject.status = status
-  }
-  if (jobType && jobType !== 'all') {
-    queryObject.jobType = jobType
-  }
+  
   if (search) {
     queryObject.productName = { $regex: search, $options: 'i' }
   }
   // NO AWAIT
 
-  let result = Job.find(queryObject)
+  let result = Product.find(queryObject)
 
   // chain sort conditions
 
@@ -63,21 +57,21 @@ const getAllJobs = async (req, res) => {
 
   result = result.skip(skip).limit(limit)
 
-  const jobs = await result
+  const products = await result
 
-  const totalJobs = await Job.countDocuments(queryObject)
-  const numOfPages = Math.ceil(totalJobs / limit)
+  const totalProducts = await Product.countDocuments(queryObject)
+  const numOfPages = Math.ceil(totalProducts / limit)
 
-  res.status(StatusCodes.OK).json({ jobs, totalJobs, numOfPages })
+  res.status(StatusCodes.OK).json({ products, totalProducts, numOfPages })
 }
-const updateJob = async (req, res) => {
+const updateProduct = async (req, res) => {
   const { id: jobId } = req.params
   const { stock, productName } = req.body
 
   if (!productName || !stock) {
     throw new BadRequestError('Please provide all values')
   }
-  const job = await Job.findOne({ _id: jobId })
+  const job = await Product.findOne({ _id: jobId })
 
   if (!job) {
     throw new NotFoundError(`No job with id :${jobId}`)
@@ -86,17 +80,17 @@ const updateJob = async (req, res) => {
 
   checkPermissions(req.user, job.createdBy)
 
-  const updatedJob = await Job.findOneAndUpdate({ _id: jobId }, req.body, {
+  const updatedProduct = await Product.findOneAndUpdate({ _id: jobId }, req.body, {
     new: true,
     runValidators: true,
   })
 
-  res.status(StatusCodes.OK).json({ updatedJob })
+  res.status(StatusCodes.OK).json({ updatedProduct })
 }
-const deleteJob = async (req, res) => {
+const deleteProduct = async (req, res) => {
   const { id: jobId } = req.params
 
-  const job = await Job.findOne({ _id: jobId })
+  const job = await Product.findOne({ _id: jobId })
 
   if (!job) {
     throw new NotFoundError(`No job with id :${jobId}`)
@@ -106,10 +100,10 @@ const deleteJob = async (req, res) => {
 
   await job.remove()
 
-  res.status(StatusCodes.OK).json({ msg: 'Success! Job removed' })
+  res.status(StatusCodes.OK).json({ msg: 'Success! Product removed' })
 }
 const showStats = async (req, res) => {
-  let stats = await Job.aggregate([
+  let stats = await Product.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     { $group: { _id: '$status', count: { $sum: 1 } } },
   ])
@@ -125,7 +119,7 @@ const showStats = async (req, res) => {
     declined: stats.declined || 0,
   }
 
-  let monthlyApplications = await Job.aggregate([
+  let monthlyApplications = await Product.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
@@ -153,4 +147,4 @@ const showStats = async (req, res) => {
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
 }
 
-export { createProduct, deleteJob, getAllJobs, updateJob, showStats }
+export { createProduct, deleteProduct, getAllProducts, updateProduct, showStats }

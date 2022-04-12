@@ -16,7 +16,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     defaultError.statusCode = StatusCodes.BAD_REQUEST
     defaultError.msg = `${Object.keys(err.keyValue)} field has to be unique`
   }
-
+  console.log(err)
   res.status(defaultError.statusCode).json({ msg: defaultError.msg })
 }
 

@@ -3,13 +3,14 @@ const router = express.Router()
 
 import {
   createProduct,
+  getAllProducts
   // deleteJob,
   // getAllJobs,
   // updateJob,
   // showStats,
 } from '../controllers/productsController.js'
 
-router.route('/').post(createProduct)
+router.route('/').post(createProduct).get(getAllProducts)
 // // remember about :id
 // router.route('/stats').get(showStats)
 // router.route('/:id').delete(deleteJob).patch(updateJob)
