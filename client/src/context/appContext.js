@@ -54,13 +54,16 @@ const initialState = {
   editJobId: "",
   position: "",
   company: "",
+  product_name:"",
+  stock:0,
+  description:"",
   jobLocation: userLocation || "",
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
   jobType: "full-time",
   statusOptions: ["interview", "declined", "pending"],
   status: "pending",
-  jobs: [],
-  totalJobs: 0,
+  products: [],
+  totalProducts: 0,
   numOfPages: 1,
   page: 1,
   stats: {},
@@ -187,16 +190,14 @@ const AppProvider = ({ children }) => {
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES });
   };
-  const createJob = async () => {
+  const createProduct = async () => {
     dispatch({ type: CREATE_JOB_BEGIN });
     try {
-      const { position, company, jobLocation, jobType, status } = state;
-      await authFetch.post("/jobs", {
-        position,
-        company,
-        jobLocation,
-        jobType,
-        status,
+      const { product_name, stock, description} = state;
+      await authFetch.post("/products", {
+        product_name,
+        stock,
+        description
       });
       dispatch({ type: CREATE_JOB_SUCCESS });
       dispatch({ type: CLEAR_VALUES });
@@ -210,10 +211,10 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const getJobs = async () => {
+  const getProducts = async () => {
     const { page, search, searchStatus, searchType, sort } = state;
 
-    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    let url = `/products?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
     if (search) {
       url = url + `&search=${search}`;
     }
@@ -235,15 +236,15 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const setEditJob = (id) => {
+  const setEditProduct = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } });
   };
-  const editJob = async () => {
+  const editProduct = async () => {
     dispatch({ type: EDIT_JOB_BEGIN });
 
     try {
       const { position, company, jobLocation, jobType, status } = state;
-      await authFetch.patch(`/jobs/${state.editJobId}`, {
+      await authFetch.patch(`/products/${state.editJobId}`, {
         company,
         position,
         jobLocation,
@@ -261,11 +262,11 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-  const deleteJob = async (jobId) => {
+  const deleteProduct = async (productId) => {
     dispatch({ type: DELETE_JOB_BEGIN });
     try {
-      await authFetch.delete(`/jobs/${jobId}1`);
-      getJobs();
+      await authFetch.delete(`/products/${productId}`);
+      getProducts();
     } catch (error) {
       logoutUser();
     }
@@ -303,11 +304,11 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         clearValues,
-        createJob,
-        getJobs,
-        setEditJob,
-        deleteJob,
-        editJob,
+        createProduct,
+        getProducts,
+        setEditProduct,
+        deleteProduct,
+        editProduct,
         showStats,
         clearFilters,
         changePage,

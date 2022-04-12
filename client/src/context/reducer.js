@@ -145,7 +145,7 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: "success",
-      alertText: "New Job Created!",
+      alertText: "New Product Created!",
     };
   }
   if (action.type === CREATE_JOB_ERROR) {
@@ -164,8 +164,8 @@ const reducer = (state, action) => {
     return {
       ...state,
       isLoading: false,
-      jobs: action.payload.jobs,
-      totalJobs: action.payload.totalJobs,
+      products: action.payload.products,
+      totalProducts: action.payload.totalProducts,
       numOfPages: action.payload.numOfPages,
     };
   }

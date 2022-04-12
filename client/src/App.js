@@ -5,7 +5,7 @@ import {
   Profile,
   SharedLayout,
   Stats,
-  AddJob,
+  AddProduct,
 } from "./pages/dashboard";
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Stats />} />
-          <Route path="all-jobs" element={<AllJobs />} />
-          <Route path="add-job" element={<AddJob />} />
+          {/* <Route index element={<Stats />} /> */}
+          {/* <Route path="all-jobs" element={<AllJobs />} /> */}
+          <Route index path="add-product" element={<AddProduct />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="/register" element={<Register />} />
