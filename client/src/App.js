@@ -20,9 +20,8 @@ function App() {
             </ProtectedRoute>
           }
         >
-          {/* <Route index element={<Stats />} /> */}
-          <Route path="all-products" element={<AllProducts />} />
-          <Route index path="add-product" element={<AddProduct />} />
+          <Route index path="all-products" element={<AllProducts />} />
+          <Route path="add-product" element={<AddProduct />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="/register" element={<Register />} />

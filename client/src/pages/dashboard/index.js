@@ -1,4 +1,4 @@
-import AddProduct from './Add New Product'
+import AddProduct from './AddNewProduct'
 import AllProducts from './AllProducts'
 import Profile from './Profile'
 import SharedLayout from './SharedLayout'

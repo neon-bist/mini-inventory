@@ -43,18 +43,7 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
     }
   }
-  .pending {
-    background: #fcefc7;
-    color: #e9b949;
-  }
-  .interview {
-    background: #e0e8f9;
-    color: #647acb;
-  }
-  .declined {
-    color: #d66a6a;
-    background: #ffeeee;
-  }
+
   .content {
     padding: 1rem 1.5rem;
   }
@@ -100,13 +89,12 @@ const Wrapper = styled.article`
     background: var(--red-light);
   }
   .actions {
-    display: none;
-    position: absolute;
+    visibility:hidden;
     top: 1rem;
     right: 1rem;
   }
   &:hover .actions {
-    display: block;
+    visibility: visible;
   }
 `;
 
