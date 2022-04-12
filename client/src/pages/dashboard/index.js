@@ -1,6 +1,6 @@
 import AddProduct from './Add New Product'
-import AllJobs from './AllJobs'
+import AllProducts from './AllProducts'
 import Profile from './Profile'
 import SharedLayout from './SharedLayout'
 import Stats from './Stats'
-export { AllJobs, Profile, SharedLayout, Stats, AddProduct }
+export { AllProducts, Profile, SharedLayout, Stats, AddProduct }

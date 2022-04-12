@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Register, Landing, Error, ProtectedRoute } from "./pages";
 import {
-  AllJobs,
+  AllProducts,
   Profile,
   SharedLayout,
   Stats,
@@ -21,7 +21,7 @@ function App() {
           }
         >
           {/* <Route index element={<Stats />} /> */}
-          {/* <Route path="all-jobs" element={<AllJobs />} /> */}
+          <Route path="all-products" element={<AllProducts />} />
           <Route index path="add-product" element={<AddProduct />} />
           <Route path="profile" element={<Profile />} />
         </Route>
