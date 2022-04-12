@@ -54,7 +54,7 @@ const initialState = {
   editJobId: "",
   position: "",
   company: "",
-  product_name:"",
+  productName:"",
   stock:0,
   description:"",
   jobLocation: userLocation || "",
@@ -193,9 +193,10 @@ const AppProvider = ({ children }) => {
   const createProduct = async () => {
     dispatch({ type: CREATE_JOB_BEGIN });
     try {
-      const { product_name, stock, description} = state;
+      const { productName, stock, description} = state;
+      console.log(productName, stock, description)
       await authFetch.post("/products", {
-        product_name,
+        productName,
         stock,
         description
       });

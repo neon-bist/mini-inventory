@@ -123,8 +123,9 @@ const reducer = (state, action) => {
     const initialState = {
       isEditing: false,
       editJobId: "",
-      position: "",
-      company: "",
+      productName: "",
+      stock: 0,
+      description: "",
       jobLocation: state.userLocation,
       jobType: "full-time",
       status: "pending",

@@ -8,7 +8,7 @@ const AddJob = () => {
     isEditing,
     showAlert,
     displayAlert,
-    product_name,
+    productName,
     stock,
     description,
     handleChange,
@@ -20,7 +20,7 @@ const AddJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!stock || !product_name) {
+    if (!stock || !productName) {
       displayAlert()
       return
     }
@@ -46,9 +46,9 @@ const AddJob = () => {
           {/* Product Name */}
           <FormRow
             type='text'
-            name='product_name'
+            name='productName'
             labelText='Product Name'
-            value={product_name}
+            value={productName}
             handleChange={handleInputChange}
           />
           {/* company */}
