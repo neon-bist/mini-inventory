@@ -20,17 +20,17 @@ import {
   HANDLE_CHANGE,
   CLEAR_VALUES,
 
-  CREATE_JOB_BEGIN,
-  CREATE_JOB_SUCCESS,
-  CREATE_JOB_ERROR,
+  CREATE_PRODUCT_BEGIN,
+  CREATE_PRODUCT_SUCCESS,
+  CREATE_PRODUCT_ERROR,
 
-  GET_JOBS_BEGIN,
-  GET_JOBS_SUCCESS,
-  SET_EDIT_JOB,
-  DELETE_JOB_BEGIN,
-  EDIT_JOB_BEGIN,
-  EDIT_JOB_SUCCESS,
-  EDIT_JOB_ERROR,
+  GET_PRODUCTS_BEGIN,
+  GET_PRODUCTS_SUCCESS,
+  SET_EDIT_PRODUCT,
+  DELETE_PRODUCT_BEGIN,
+  EDIT_PRODUCT_BEGIN,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
@@ -57,11 +57,6 @@ const initialState = {
   productName:"",
   stock:0,
   description:"",
-  jobLocation: userLocation || "",
-  jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
-  jobType: "full-time",
-  statusOptions: ["interview", "declined", "pending"],
-  status: "pending",
   products: [],
   totalProducts: 0,
   numOfPages: 1,
@@ -191,7 +186,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
   const createProduct = async () => {
-    dispatch({ type: CREATE_JOB_BEGIN });
+    dispatch({ type: CREATE_PRODUCT_BEGIN });
     try {
       const { productName, stock, description} = state;
       console.log(productName, stock, description)
@@ -200,12 +195,12 @@ const AppProvider = ({ children }) => {
         stock,
         description
       });
-      dispatch({ type: CREATE_JOB_SUCCESS });
+      dispatch({ type: CREATE_PRODUCT_SUCCESS });
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
-        type: CREATE_JOB_ERROR,
+        type: CREATE_PRODUCT_ERROR,
         payload: { msg: error.response.data.msg },
       });
     }
@@ -213,18 +208,18 @@ const AppProvider = ({ children }) => {
   };
 
   const getProducts = async () => {
-    const { page, search, searchStatus, searchType, sort } = state;
+    const { page, search, sort } = state;
 
-    let url = `/products?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    let url = `/products?page=${page}&sort=${sort}`;
     if (search) {
       url = url + `&search=${search}`;
     }
-    dispatch({ type: GET_JOBS_BEGIN });
+    dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
       const { data } = await authFetch(url);
       const { products, totalProducts, numOfPages } = data;
       dispatch({
-        type: GET_JOBS_SUCCESS,
+        type: GET_PRODUCTS_SUCCESS,
         payload: {
           products,
           totalProducts,
@@ -238,10 +233,10 @@ const AppProvider = ({ children }) => {
   };
 
   const setEditProduct = (id) => {
-    dispatch({ type: SET_EDIT_JOB, payload: { id } });
+    dispatch({ type: SET_EDIT_PRODUCT, payload: { id } });
   };
   const editProduct = async () => {
-    dispatch({ type: EDIT_JOB_BEGIN });
+    dispatch({ type: EDIT_PRODUCT_BEGIN });
 
     try {
       const { productName, stock, description } = state;
@@ -250,19 +245,19 @@ const AppProvider = ({ children }) => {
         stock,
         description
       });
-      dispatch({ type: EDIT_JOB_SUCCESS });
+      dispatch({ type: EDIT_PRODUCT_SUCCESS });
       dispatch({ type: CLEAR_VALUES });
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
-        type: EDIT_JOB_ERROR,
+        type: EDIT_PRODUCT_ERROR,
         payload: { msg: error.response.data.msg },
       });
     }
     clearAlert();
   };
   const deleteProduct = async (productId) => {
-    dispatch({ type: DELETE_JOB_BEGIN });
+    dispatch({ type: DELETE_PRODUCT_BEGIN });
     try {
       await authFetch.delete(`/products/${productId}`);
       getProducts();

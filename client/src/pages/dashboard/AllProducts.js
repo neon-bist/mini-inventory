@@ -1,6 +1,6 @@
 import { ProductsContainer, SearchContainer } from '../../components'
 
-const AllJobs = () => {
+const AllProducts = () => {
   return (
     <>
       <SearchContainer />
@@ -9,4 +9,4 @@ const AllJobs = () => {
   )
 }
 
-export default AllJobs
+export default AllProducts

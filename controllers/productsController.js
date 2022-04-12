@@ -15,11 +15,11 @@ const createProduct = async (req, res) => {
     throw new BadRequestError('Please provide all values')
   }
   req.body.createdBy = req.user.userId
-  const job = await Product.create(req.body)
-  res.status(StatusCodes.CREATED).json({ job })
+  const product = await Product.create(req.body)
+  res.status(StatusCodes.CREATED).json({ product })
 }
 const getAllProducts = async (req, res) => {
-  const { status, jobType, sort, search } = req.query
+  const {  sort, search } = req.query
   
 
   const queryObject = {
@@ -74,7 +74,7 @@ const updateProduct = async (req, res) => {
   const product = await Product.findOne({ _id: productId })
 
   if (!product) {
-    throw new NotFoundError(`No job with id :${productId}`)
+    throw new NotFoundError(`No product with id :${productId}`)
   }
   // check permissions
 
@@ -93,7 +93,7 @@ const deleteProduct = async (req, res) => {
   const product = await Product.findOne({ _id: productId })
 
   if (!product) {
-    throw new NotFoundError(`No job with id :${productId}`)
+    throw new NotFoundError(`No product with id :${productId}`)
   }
 
   checkPermissions(req.user, product.createdBy)

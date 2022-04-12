@@ -11,16 +11,16 @@ import {
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
-  CREATE_JOB_BEGIN,
-  CREATE_JOB_SUCCESS,
-  CREATE_JOB_ERROR,
-  GET_JOBS_BEGIN,
-  GET_JOBS_SUCCESS,
-  SET_EDIT_JOB,
-  DELETE_JOB_BEGIN,
-  EDIT_JOB_BEGIN,
-  EDIT_JOB_SUCCESS,
-  EDIT_JOB_ERROR,
+  CREATE_PRODUCT_BEGIN,
+  CREATE_PRODUCT_SUCCESS,
+  CREATE_PRODUCT_ERROR,
+  GET_PRODUCTS_BEGIN,
+  GET_PRODUCTS_SUCCESS,
+  SET_EDIT_PRODUCT,
+  DELETE_PRODUCT_BEGIN,
+  EDIT_PRODUCT_BEGIN,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
@@ -57,7 +57,6 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
-      jobLocation: action.payload.location,
       showAlert: false,
       alertType: "success",
       alertText: action.payload.alertText,
@@ -83,7 +82,6 @@ const reducer = (state, action) => {
       ...initialState,
       user: null,
       token: null,
-      jobLocation: "",
       userLocation: "",
     };
   }
@@ -97,7 +95,6 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
-      jobLocation: action.payload.location,
       showAlert: true,
       alertType: "success",
       alertText: "User Profile Updated!",
@@ -122,13 +119,9 @@ const reducer = (state, action) => {
   if (action.type === CLEAR_VALUES) {
     const initialState = {
       isEditing: false,
-      editJobId: "",
       productName: "",
       stock: 0,
       description: "",
-      jobLocation: state.userLocation,
-      jobType: "full-time",
-      status: "pending",
     };
 
     return {
@@ -136,11 +129,11 @@ const reducer = (state, action) => {
       ...initialState,
     };
   }
-  if (action.type === CREATE_JOB_BEGIN) {
+  if (action.type === CREATE_PRODUCT_BEGIN) {
     return { ...state, isLoading: true };
   }
 
-  if (action.type === CREATE_JOB_SUCCESS) {
+  if (action.type === CREATE_PRODUCT_SUCCESS) {
     return {
       ...state,
       isLoading: false,
@@ -149,7 +142,7 @@ const reducer = (state, action) => {
       alertText: "New Product Created!",
     };
   }
-  if (action.type === CREATE_JOB_ERROR) {
+  if (action.type === CREATE_PRODUCT_ERROR) {
     return {
       ...state,
       isLoading: false,
@@ -158,10 +151,10 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     };
   }
-  if (action.type === GET_JOBS_BEGIN) {
+  if (action.type === GET_PRODUCTS_BEGIN) {
     return { ...state, isLoading: true, showAlert: false };
   }
-  if (action.type === GET_JOBS_SUCCESS) {
+  if (action.type === GET_PRODUCTS_SUCCESS) {
     console.log(action.payload.products)
     return {
       ...state,
@@ -171,7 +164,7 @@ const reducer = (state, action) => {
       numOfPages: action.payload.numOfPages,
     };
   }
-  if (action.type === SET_EDIT_JOB) {
+  if (action.type === SET_EDIT_PRODUCT) {
     const product = state.products.find((product) => product._id === action.payload.id);
     const { _id, productName, stock, description } = product;
     return {
@@ -183,25 +176,25 @@ const reducer = (state, action) => {
       description
     };
   }
-  if (action.type === DELETE_JOB_BEGIN) {
+  if (action.type === DELETE_PRODUCT_BEGIN) {
     return { ...state, isLoading: true };
   }
-  if (action.type === EDIT_JOB_BEGIN) {
+  if (action.type === EDIT_PRODUCT_BEGIN) {
     return {
       ...state,
       isLoading: true,
     };
   }
-  if (action.type === EDIT_JOB_SUCCESS) {
+  if (action.type === EDIT_PRODUCT_SUCCESS) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
       alertType: "success",
-      alertText: "Job Updated!",
+      alertText: "Product Updated!",
     };
   }
-  if (action.type === EDIT_JOB_ERROR) {
+  if (action.type === EDIT_PRODUCT_ERROR) {
     return {
       ...state,
       isLoading: false,

@@ -2,10 +2,10 @@ import moment from 'moment'
 import { FaCalendarAlt, FaMoneyBill } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/appContext'
-import Wrapper from '../assets/wrappers/Job'
-import JobInfo from './JobInfo'
+import Wrapper from '../assets/wrappers/Product'
+import ProductInfo from './ProductInfo'
 
-const Job = ({
+const Product = ({
   _id,
   productName,
   stock,
@@ -27,8 +27,8 @@ const Job = ({
       </header>
       <div className='content'>
         <div className='content-center'>
-          <JobInfo icon={<FaMoneyBill />} text={stock} />
-          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <ProductInfo icon={<FaMoneyBill />} text={stock} />
+          <ProductInfo icon={<FaCalendarAlt />} text={date} />
         </div>
         <footer>
           <div className='actions'>
@@ -53,4 +53,4 @@ const Job = ({
   )
 }
 
-export default Job
+export default Product

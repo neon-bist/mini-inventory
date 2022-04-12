@@ -1,9 +1,7 @@
 import Alert from './Alert'
 import BigSidebar from './BigSidebar'
-import ChartsContainer from './ChartsContainer'
 import FormRow from './FormRow'
 import FormRowSelect from './FormRowSelect'
-import JobsContainer from './JobsContainer'
 import ProductsContainer from './ProductsContainer'
 import Loading from './Loading'
 import Logo from './Logo'
@@ -20,9 +18,7 @@ export {
   SmallSidebar,
   FormRowSelect,
   SearchContainer,
-  JobsContainer,
   ProductsContainer,
   StatsContainer,
-  ChartsContainer,
   Loading,
 }

@@ -1,7 +1,7 @@
 {
-  "name": "jobify",
+  "name": "inventory",
   "version": "1.0.0",
-  "description": "#### Track Your Job Search",
+  "description": "#### Track Your Product Search",
   "main": "index.js",
   "type": "module",
   "scripts": {

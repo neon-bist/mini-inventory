@@ -2,7 +2,7 @@ import { useAppContext } from '../context/appContext'
 import { useEffect } from 'react'
 import Loading from './Loading'
 import Product from './Product'
-import Wrapper from '../assets/wrappers/JobsContainer'
+import Wrapper from '../assets/wrappers/ProductsContainer'
 import PageBtnContainer from './PageBtnContainer'
 
 const ProductsContainer = () => {

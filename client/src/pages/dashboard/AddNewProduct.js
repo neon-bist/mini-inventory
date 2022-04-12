@@ -2,7 +2,7 @@ import { FormRow, Alert } from '../../components'
 import { useAppContext } from '../../context/appContext'
 import Wrapper from '../../assets/wrappers/DashboardFormPage'
 
-const AddJob = () => {
+const AddNewProduct = () => {
   const {
     isLoading,
     isEditing,
@@ -92,4 +92,4 @@ const AddJob = () => {
   )
 }
 
-export default AddJob
+export default AddNewProduct
