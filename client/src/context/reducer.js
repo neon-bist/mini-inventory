@@ -162,6 +162,7 @@ const reducer = (state, action) => {
     return { ...state, isLoading: true, showAlert: false };
   }
   if (action.type === GET_JOBS_SUCCESS) {
+    console.log(action.payload.products)
     return {
       ...state,
       isLoading: false,
@@ -171,17 +172,15 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === SET_EDIT_JOB) {
-    const job = state.jobs.find((job) => job._id === action.payload.id);
-    const { _id, position, company, jobLocation, jobType, status } = job;
+    const product = state.products.find((product) => product._id === action.payload.id);
+    const { _id, productName, stock, description } = product;
     return {
       ...state,
       isEditing: true,
       editJobId: _id,
-      position,
-      company,
-      jobLocation,
-      jobType,
-      status,
+      productName,
+      stock,
+      description
     };
   }
   if (action.type === DELETE_JOB_BEGIN) {

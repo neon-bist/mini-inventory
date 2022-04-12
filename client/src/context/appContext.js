@@ -222,12 +222,12 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_JOBS_BEGIN });
     try {
       const { data } = await authFetch(url);
-      const { jobs, totalJobs, numOfPages } = data;
+      const { products, totalProducts, numOfPages } = data;
       dispatch({
         type: GET_JOBS_SUCCESS,
         payload: {
-          jobs,
-          totalJobs,
+          products,
+          totalProducts,
           numOfPages,
         },
       });
