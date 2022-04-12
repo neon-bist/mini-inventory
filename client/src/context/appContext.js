@@ -273,12 +273,11 @@ const AppProvider = ({ children }) => {
   const showStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
-      const { data } = await authFetch("/jobs/stats");
+      const { data } = await authFetch("/products/stats");
       dispatch({
         type: SHOW_STATS_SUCCESS,
         payload: {
-          stats: data.defaultStats,
-          monthlyApplications: data.monthlyApplications,
+          stats: data.stats
         },
       });
     } catch (error) {

@@ -105,25 +105,15 @@ const deleteProduct = async (req, res) => {
 const showStats = async (req, res) => {
   let stats = await Product.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$status', count: { $sum: 1 } } },
+    { $group: { _id: '$createdBy', totalProducts: { $sum: 1 } , totalPriceWorth: {$sum: '$stock'}} },
   ])
-  stats = stats.reduce((acc, curr) => {
-    const { _id: title, count } = curr
-    acc[title] = count
-    return acc
-  }, {})
 
-  const defaultStats = {
-    pending: stats.pending || 0,
-    interview: stats.interview || 0,
-    declined: stats.declined || 0,
-  }
 
   let monthlyApplications = await Product.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
-        _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+        _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' }, },
         count: { $sum: 1 },
       },
     },
@@ -144,7 +134,7 @@ const showStats = async (req, res) => {
     })
     .reverse()
 
-  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
+  res.status(StatusCodes.OK).json({ stats:stats[0] })
 }
 
 export { createProduct, deleteProduct, getAllProducts, updateProduct, showStats }

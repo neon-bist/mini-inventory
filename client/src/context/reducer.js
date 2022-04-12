@@ -218,11 +218,11 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === SHOW_STATS_SUCCESS) {
+    console.log("hi", action.payload.stats)
     return {
       ...state,
       isLoading: false,
       stats: action.payload.stats,
-      monthlyApplications: action.payload.monthlyApplications,
     };
   }
   if (action.type === CLEAR_FILTERS) {
